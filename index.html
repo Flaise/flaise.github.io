@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio</title>
+  <meta name="description" content="Portfolio — selected projects, quick summaries, and links.">
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="Portfolio — Game dev, systems, and tools engineering. Scalable workflows for creative teams." />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <div class="tag">Game dev • Systems • Tools — Scalable workflows for creative teams.</div>
+      </div>
+      <div class="actions">
+        <input id="search" type="search" placeholder="Search projects…" aria-label="Search projects" />
+        <button class="pill" data-filter="all" data-active="true" type="button">All</button>
+        <button class="pill" data-filter="Game" type="button">Games</button>
+        <button class="pill" data-filter="Tool" type="button">Tools</button>
+        <!-- <button class="pill" data-filter="vr" type="button">VR</button> -->
+      </div>
+    </header>
+
+    <main class="grid" id="grid" aria-live="polite"></main>
+
+    <footer>
+      <div>Contact:
+        <span class="links">
+          <a href="mailto:x.Flaise@gmail.com">Email</a> ·
+          <a href="https://github.com/Flaise" target="_blank" rel="noopener">GitHub</a>
+        </span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Data first, then app -->
+  <script src="data/projects.js"></script>
+  <script src="app.js" defer></script>
+</body>
+</html>
