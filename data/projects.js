@@ -193,6 +193,72 @@ source      = \${out_dir}
 target      = ./releases/\${project_name}_\${gitdescribe}.zip
 `;
 
+const infiltrateScriptExcerpt = `
+/ Intro bit where she talks to the door
+TRIGGER
+ONCE
+DELAY .1
+FADEIN .2
+AUDIOLOOP ambience_shower
+AUDIOFADE ambience_shower .5
+AUDIOFADE ambience_shower .5 5
+DELAY 3
+AUDIOSTART door_locked_chapel
+AUDIOFADE door_locked_chapel .9
+ANIMATE door_chapel2 last
+DELAY 3
+AUDIOSTART door_jiggle_chapel
+AUDIOFADE door_jiggle_chapel .9
+ANIMATE door_chapel2 first
+ANIMATE door_chapel2 last
+ANIMATE door_chapel2 first
+ANIMATE door_chapel2 last
+ANIMATE door_chapel2 first
+ANIMATE door_chapel2 last
+DELAY 1.6
+LEFT 1:(Huh. I guess it actually makes sense that they'd start locking the chapel door at night, after I... yeah.)
+LEFT 2:(But that doesn't throw the plan off TOO much! I just need to find another way into the chapel.)
+LEFT 3:(Time to be a clever thief.)
+DELAY .1
+CONTROLS
+
+TRIGGER
+ONCE begin_weregilding
+POSITION 928 1252 60 20
+AUDIOLOOP weregilded1
+AUDIOFADE weregilded1 .7
+
+TRIGGER
+ONCE begin_weregilding
+POSITION 925 1278 65 19
+AUDIOLOOP weregilded1
+AUDIOFADE weregilded1 .7
+
+TRIGGER
+ONCE begin_weregilding
+POSITION 911 1259 40 33
+AUDIOLOOP weregilded1
+AUDIOFADE weregilded1 .7
+
+TRIGGER
+ONCE begin_weregilding
+POSITION 960 1258 46 38
+AUDIOLOOP weregilded1
+AUDIOFADE weregilded1 .7
+
+
+/ Trying to open the chapel door
+TRIGGER
+DESTINATION 942 1229 33 40
+POSITION 930 1257 54 17
+ONCE pick_chapel
+LEFT 85:(Stephane gave me the key to the chapel undercroft, not the front door. He must not have known it'd be locked.)
+LEFT 4:(Alright, lockpick. It's time to shine.)
+CANTUNLOCK door_background_2 door_foreground_2 hand_lockpick
+LEFT 5:(...I'm not sure why I expected a lockpick to be as simple as a regular key.)
+SET mention_stephane
+`;
+
 window.projects = [
   {
     order: 1,
@@ -260,6 +326,49 @@ window.projects = [
   {
     order: 3,
     visibility: "featured",
+    slug: "infiltrate",
+    title: "Infiltrate: Interactive sequence from Prequel Adventure",
+    role: "Programmer",
+    year: "2017",
+    type: "Game",
+    blurb: "Nonlinear interactive scene powered by a refactored Flash engine and a declarative DSL for authoring complex triggers and animations.",
+    stack: ["Flash"],
+    tags: ["Web", "Domain Specific Language"],
+    thumb: "./images/infiltrate_hero2.png",
+    links: { play: "https://www.prequeladventure.com/2017/09/katia-infiltrate/" },
+    highlights: [
+      "Goal: Deliver a stable, readable, and extensible version of Prequel’s interactive Flash engine for a major nonlinear sequence.",
+      "Approach: Untangled the inherited Excelsior engine, rebuilt most systems except movement/UI, and introduced a compact DSL for scene logic, triggers, audio, and animation.",
+      "Outcome: Shipped a long interactive chapter with zero post-launch bug reports; the DSL enabled extensive content authoring without engineering bottlenecks."
+    ],
+    description: [
+      "Infiltrate is the largest interactive sequence from Prequel Adventure, built on a legacy Flash engine that had grown through many feature additions. When I took over engineering, much of the behavior was inconsistent and difficult to extend. Movement and dialogue worked reliably, but most other systems needed restructuring before the next project could be completed.",
+      "I focused on stabilizing the engine and making it author-friendly. I rebuilt most subsystems, removed interdependencies, and replaced the original data-loading approach with a small DSL designed around the actual semantics of scene scripting. The writer-artist could define positional triggers, delays, animations, audio loops and fades, AND/OR conditions, and gated interactions in a format that matched narrative logic rather than engine internals. This supported a much larger script than expected and allowed content to be produced quickly without engineering involvement.",
+      "The sequence shipped cleanly and ran for years without bug reports until Flash support ended. Engineering never became the bottleneck; once the tools were in place, the pacing was governed by asset production. The chapter was widely played by the comic’s audience and now remains as a recorded playthrough with tens of thousands of views."
+    ],
+    related: [],
+    gallery: [
+      { type: "video", src: "https://www.youtube.com/watch?v=3ye5nHDe9qI", title: "Gameplay" },
+      { type: "image", src: "./images/infiltrate_screenshot01.png", alt: "Gameplay" },
+      { type: "image", src: "./images/infiltrate_screenshot02.png", alt: "Gameplay" },
+      { type: "image", src: "./images/infiltrate_screenshot03.png", alt: "Gameplay" },
+      { type: "image", src: "./images/infiltrate_screenshot04.png", alt: "Gameplay" },
+      { type: "image", src: "./images/infiltrate_screenshot05.png", alt: "Gameplay" },
+      { type: "image", src: "./images/infiltrate_screenshot06.png", alt: "Gameplay" },
+      { type: "image", src: "./images/infiltrate_screenshot07.png", alt: "Gameplay" },
+      { type: "image", src: "./images/infiltrate_screenshot08.png", alt: "Gameplay" }
+    ],
+    "examples": [
+      {
+        "title": "Excerpt from one of the scripts used in Infiltrate. Notice how it's accessible to non-technical users:",
+        "language": "DSL",
+        "code": infiltrateScriptExcerpt,
+      }
+    ]
+  },
+  {
+    order: 4,
+    visibility: "featured",
     slug: "spacelaser",
     title: "Spacelaser: multiplayer web game",
     role: "Full-stack (Rust/JS)",
@@ -289,7 +398,7 @@ window.projects = [
     ]
   },
   {
-    order: 4,
+    order: 5,
     visibility: "featured",
     slug: "infantry-and-arrows",
     title: "Infantry & Arrows",
@@ -315,7 +424,7 @@ window.projects = [
     gallery: []
   },
   {
-    order: 5,
+    order: 6,
     visibility: "featured",
     slug: "python-build-orchestrator",
     title: "Build Orchestrator (Python)",
@@ -349,7 +458,7 @@ window.projects = [
   },
 
   /*{
-    order: 6,
+    order: 7,
     visibility: "secondary",
     slug: "vrchat-philosophy-hangout",
     title: "VRChat Philosophy Hangout (published)",
@@ -374,7 +483,7 @@ window.projects = [
     gallery: []
   },*/
   {
-    order: 7,
+    order: 8,
     visibility: "secondary",
     slug: "sclan",
     title: "SCLAN: Simple Communication over LAN",
@@ -400,7 +509,7 @@ window.projects = [
     gallery: []
   },
   {
-    order: 8,
+    order: 9,
     visibility: "secondary",
     slug: "semicoroutine-js",
     title: "semicoroutine.js",
@@ -425,7 +534,7 @@ window.projects = [
     gallery: []
   },
   {
-    order: 9,
+    order: 10,
     visibility: "secondary",
     slug: "desert-digger",
     title: "Desert Digger (Palette Jam 2)",
@@ -453,7 +562,7 @@ window.projects = [
     ]
   },
   {
-    order: 10,
+    order: 11,
     visibility: "secondary",
     slug: "mytacism",
     title: "mytacism.js: AST constant folding",
